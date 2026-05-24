@@ -1,4 +1,4 @@
-import { Deck, BasePlayer, PlayerStatus, rankValue, Card, Suit, Rank } from '../shared/sharedCardsEngine';
+import { Deck, BasePlayer, PlayerStatus, rankValue, Card, Suit, Rank } from './shared/sharedCardsEngine';
 export { Suit, Rank, Card, PlayerStatus, Deck };
 
 /**Given below is the ranking of the cards which defines Teen Patti hierarchy:
