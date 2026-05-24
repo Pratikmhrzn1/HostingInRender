@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "outDir": "dist",
-    "rootDir": ".",
+    "target": "ES2020",
     "module": "commonjs",
-    "lib": ["ES6"],
-    "types": ["node"],
+
+    "rootDir": ".",
+    "outDir": "dist",
+
     "esModuleInterop": true,
-    "strict": false
-  }
+    "strict": true
+  },
+
+  "include": [
+    "**/*.ts"
+  ]
 }

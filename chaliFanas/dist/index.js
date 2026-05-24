@@ -1,9 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_1 = require("socket.io");
 const http_1 = require("http");
 const teenPattiEngine_1 = require("./teenPattiEngine");
 const sharedCardsEngine_1 = require("./shared/sharedCardsEngine");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const httpServer = (0, http_1.createServer)();
 const io = new socket_io_1.Server(httpServer, { cors: { origin: '*' } });
 const rooms = new Map();
@@ -13,9 +18,8 @@ const STARTING_CHIPS = 500;
 const TURN_TIMEOUT = 30000;
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function getSocketId(room, playerId) {
-    var _a;
-    return (_a = [...room.playerIds.entries()]
-        .find(([, p]) => p.id === playerId)) === null || _a === void 0 ? void 0 : _a[0];
+    return [...room.playerIds.entries()]
+        .find(([, p]) => p.id === playerId)?.[0];
 }
 function broadcastGameState(roomId, room) {
     if (!room.game)
@@ -168,7 +172,7 @@ io.on('connection', (socket) => {
     // ── 2. Bet blind ──────────────────────────────────────────────
     socket.on('bet_blind', ({ roomId }) => {
         const room = rooms.get(roomId);
-        if (!(room === null || room === void 0 ? void 0 : room.game))
+        if (!room?.game)
             return;
         const player = room.playerIds.get(socket.id);
         if (!player)
@@ -193,7 +197,7 @@ io.on('connection', (socket) => {
     // ── 3. See cards ──────────────────────────────────────────────
     socket.on('see_cards', ({ roomId }) => {
         const room = rooms.get(roomId);
-        if (!(room === null || room === void 0 ? void 0 : room.game))
+        if (!room?.game)
             return;
         const player = room.playerIds.get(socket.id);
         if (!player)
@@ -214,7 +218,7 @@ io.on('connection', (socket) => {
     // ── 4. Bet seen ───────────────────────────────────────────────
     socket.on('bet_seen', ({ roomId }) => {
         const room = rooms.get(roomId);
-        if (!(room === null || room === void 0 ? void 0 : room.game))
+        if (!room?.game)
             return;
         const player = room.playerIds.get(socket.id);
         if (!player)
@@ -240,7 +244,7 @@ io.on('connection', (socket) => {
     // ── 5. Fold ───────────────────────────────────────────────────
     socket.on('fold', ({ roomId }) => {
         const room = rooms.get(roomId);
-        if (!(room === null || room === void 0 ? void 0 : room.game))
+        if (!room?.game)
             return;
         const player = room.playerIds.get(socket.id);
         if (!player)
@@ -268,7 +272,7 @@ io.on('connection', (socket) => {
     // ── 6. Showdown vote ──────────────────────────────────────────
     socket.on('showdown', ({ roomId }) => {
         const room = rooms.get(roomId);
-        if (!(room === null || room === void 0 ? void 0 : room.game))
+        if (!room?.game)
             return;
         const player = room.playerIds.get(socket.id);
         if (!player)
@@ -367,4 +371,7 @@ io.on('connection', (socket) => {
         });
     });
 });
-httpServer.listen(3001, () => console.log('Full game server running on port 3001'));
+const PORT = Number(process.env.PORT) || 3001;
+httpServer.listen(PORT, "0.0.0.0", () => {
+    console.log(`Full game server running on port ${PORT}`);
+});
