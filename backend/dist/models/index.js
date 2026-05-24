@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserDetail = exports.GameHistory = exports.Game = exports.Transaction = exports.Wallet = exports.User = void 0;
+var User_entity_1 = require("./User.entity");
+Object.defineProperty(exports, "User", { enumerable: true, get: function () { return User_entity_1.User; } });
+var Wallet_entity_1 = require("./Wallet.entity");
+Object.defineProperty(exports, "Wallet", { enumerable: true, get: function () { return Wallet_entity_1.Wallet; } });
+var Transaction_entity_1 = require("./Transaction.entity");
+Object.defineProperty(exports, "Transaction", { enumerable: true, get: function () { return Transaction_entity_1.Transaction; } });
+var Game_entity_1 = require("./Game.entity");
+Object.defineProperty(exports, "Game", { enumerable: true, get: function () { return Game_entity_1.Game; } });
+var GameHistory_entity_1 = require("./GameHistory.entity");
+Object.defineProperty(exports, "GameHistory", { enumerable: true, get: function () { return GameHistory_entity_1.GameHistory; } });
+var UserDetail_entity_1 = require("./UserDetail.entity");
+Object.defineProperty(exports, "UserDetail", { enumerable: true, get: function () { return UserDetail_entity_1.UserDetail; } });

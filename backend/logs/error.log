@@ -1,0 +1,3 @@
+{"error":{"code":"28P01","file":"auth.c","length":104,"line":"320","name":"error","routine":"auth_failed","severity":"FATAL"},"level":"error","message":"❌ Server failed to start","service":"game-platform-backend","timestamp":"2026-04-20 18:21:42"}
+{"error":{"code":"28P01","file":"auth.c","length":104,"line":"320","name":"error","routine":"auth_failed","severity":"FATAL"},"level":"error","message":"❌ Server failed to start","service":"game-platform-backend","timestamp":"2026-04-20 18:34:08"}
+{"error":{"code":"28P01","file":"auth.c","length":104,"line":"320","name":"error","routine":"auth_failed","severity":"FATAL"},"level":"error","message":"❌ Server failed to start","service":"game-platform-backend","timestamp":"2026-04-20 18:35:40"}
