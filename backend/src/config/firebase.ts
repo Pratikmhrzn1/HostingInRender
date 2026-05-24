@@ -1,31 +1,43 @@
-
 import * as admin from 'firebase-admin';
-import serviceAccount from '../../serviceAccountKey.json';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 let db: admin.firestore.Firestore;
 let firebaseInitialized = false;
 
 try {
-
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
-    databaseURL: 'https://studio-1505924677-8e6ee.firebaseio.com'
-  });
-
-  db = admin.firestore();
-  firebaseInitialized = true;
-  // eslint-disable-next-line no-console
-  console.log('✅ Firebase initialized successfully');
-} catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'MODULE_NOT_FOUND') {
-        // eslint-disable-next-line no-console
-        console.warn('⚠️  Firebase service account key not found at `serviceAccountKey.json`. Firebase features will be disabled.');
-        // eslint-disable-next-line no-console
-        console.warn('Please download the key from your Firebase project settings and place it in the root directory.');
-    } else {
-        // eslint-disable-next-line no-console
-        console.error('❌ Error initializing Firebase: ', error);
+    if (
+        !process.env.FIREBASE_PROJECT_ID ||
+        !process.env.FIREBASE_CLIENT_EMAIL ||
+        !process.env.FIREBASE_PRIVATE_KEY
+    ) {
+        throw new Error('Missing Firebase environment variables');
     }
+
+    admin.initializeApp({
+        credential: admin.credential.cert({
+            projectId: process.env.FIREBASE_PROJECT_ID,
+            clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+
+            privateKey:
+                process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+        }),
+
+        databaseURL:
+            'https://studio-1505924677-8e6ee.firebaseio.com',
+    });
+
+    db = admin.firestore();
+
+    firebaseInitialized = true;
+
+    console.log('✅ Firebase initialized successfully');
+
+} catch (error) {
+    console.warn('⚠️ Firebase initialization skipped');
+
+    console.error(error);
 }
 
 export { db, firebaseInitialized };
