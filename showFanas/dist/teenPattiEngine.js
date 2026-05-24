@@ -224,7 +224,15 @@ class TeenPattiGame {
             currentTurn: this.players[this.currentTurn].id,
             gameOver: this.gameOver,
             winner: this.winnerId,
-            players: this.players.map(p => (Object.assign({ id: p.id, status: p.status, chips: p.chips, currentBet: p.currentBet, isSeen: p.isSeen }, (viewAs === p.id ? { cards: p.cards } : {})))),
+            players: this.players.map(p => ({
+                id: p.id,
+                status: p.status,
+                chips: p.chips,
+                currentBet: p.currentBet,
+                isSeen: p.isSeen,
+                // Only expose cards to the player who owns them
+                ...(viewAs === p.id ? { cards: p.cards } : {}),
+            })),
         };
     }
 }

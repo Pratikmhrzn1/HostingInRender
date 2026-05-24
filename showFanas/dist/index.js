@@ -1,8 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const socket_io_1 = require("socket.io");
 const http_1 = require("http");
 const teenPattiEngine_1 = require("./teenPattiEngine");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const httpServer = (0, http_1.createServer)();
 const io = new socket_io_1.Server(httpServer, { cors: { origin: '*' } });
 const rooms = new Map();
@@ -153,4 +158,7 @@ io.on('connection', (socket) => {
         });
     });
 });
-httpServer.listen(3000, () => console.log('Server running on port 3000'));
+const PORT = Number(process.env.PORT) || 3000;
+httpServer.listen(PORT, "0.0.0.0", () => {
+    console.log(`Full game server running on port ${PORT}`);
+});
