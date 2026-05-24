@@ -41,3 +41,9 @@
 {"level":"info","message":"✅ Socket.IO initialized","service":"game-platform-backend","timestamp":"2026-05-24 16:47:05"}
 {"level":"info","message":"🚀 Server running on port 3001","service":"game-platform-backend","timestamp":"2026-05-24 16:47:05"}
 {"level":"info","message":"📡 Environment: development","service":"game-platform-backend","timestamp":"2026-05-24 16:47:05"}
+{"level":"warn","message":"Frontend dist folder is missing; SPA routes will return 503 until it is built.","service":"game-platform-backend","timestamp":"2026-05-24 17:35:38"}
+{"level":"info","message":"✅ Database connected successfully","service":"game-platform-backend","timestamp":"2026-05-24 17:35:39"}
+{"level":"info","message":"⚠️ Redis connection skipped (disabled)","service":"game-platform-backend","timestamp":"2026-05-24 17:35:39"}
+{"level":"info","message":"✅ Socket.IO initialized","service":"game-platform-backend","timestamp":"2026-05-24 17:35:39"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"game-platform-backend","timestamp":"2026-05-24 17:35:39"}
+{"level":"info","message":"📡 Environment: development","service":"game-platform-backend","timestamp":"2026-05-24 17:35:39"}
