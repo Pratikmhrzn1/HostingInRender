@@ -2,6 +2,8 @@ import { Server } from 'socket.io';
 import { createServer } from 'http';
 import { TeenPattiGame } from './teenPattiEngine';
 import { PlayerStatus } from './shared/sharedCardsEngine';
+import dotenv from 'dotenv';
+dotenv.config();
 const httpServer = createServer();
 const io = new Server(httpServer, { cors: { origin: '*' } });
 
@@ -455,6 +457,8 @@ io.on('connection', (socket) => {
     });
 });
 
-httpServer.listen(3001, () =>
-    console.log('Full game server running on port 3001')
-);
+const PORT = Number(process.env.PORT) || 3001;
+
+httpServer.listen(PORT, "0.0.0.0", () => {
+    console.log(`Full game server running on port ${PORT}`);
+});
